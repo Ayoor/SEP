@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   
-<!-- Mirrored from 111.68.112.228:443/public/login-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Nov 2023 00:43:01 GMT -->
+<!-- Mirrored from 111.68.112.228:443/public/login-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Nov 2023 00:40:53 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
     <link rel="stylesheet" href="css/vendor.min.css">
     <link rel="stylesheet" href="css/elephant.min.css">
-    <link rel="stylesheet" href="css/login-3.min.css">
+    <link rel="stylesheet" href="css/login-1.min.css">
   </head>
   <body>
     <div class="login">
@@ -38,30 +38,51 @@
         </a>
         <h3 class="login-heading">Sign in</h3>
         <div class="login-form">
-          <form data-toggle="md-validator">
-            <div class="md-form-group md-label-floating">
-              <input class="md-form-control" type="email" name="email" spellcheck="false" autocomplete="off" data-msg-required="Please enter your email address." required>
-              <label class="md-control-label">Email</label>
+          <form data-toggle="validator">
+            <div class="form-group">
+              <label for="username" class="control-label">Username</label>
+              <input id="username" class="form-control" type="text" name="username" spellcheck="false" autocomplete="off" data-msg-required="Please enter your username." required>
             </div>
-            <div class="md-form-group md-label-floating">
-              <input class="md-form-control" type="password" name="password" minlength="6" data-msg-minlength="Password must be 6 characters or more." data-msg-required="Please enter your password." required>
-              <label class="md-control-label">Password</label>
+            <div class="form-group">
+              <label for="password" class="control-label">Password</label>
+              <input id="password" class="form-control" type="password" name="password" minlength="6" data-msg-minlength="Password must be 6 characters or more." data-msg-required="Please enter your password." required>
             </div>
-            <div class="md-form-group md-custom-controls">
-              <label class="custom-control custom-control-primary custom-checkbox">
-                <input class="custom-control-input" type="checkbox" checked="checked">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-label">Keep me signed in</span>
-              </label>
-              <span aria-hidden="true"> · </span>
-              <a href="password-3.html">Forgot password?</a>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block" type="submit">Sign in</button>
             </div>
-            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            <div class="form-group">
+              <ul class="list-inline">
+                <li>
+                  <label class="custom-control custom-control-primary custom-checkbox">
+                    <input class="custom-control-input" type="checkbox">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-label">Keep me signed in</span>
+                  </label>
+                </li>
+              </ul>
+              <ul class="list-inline">
+                <li><a href="password-1.html">Forgot username?</a></li>
+                <li>
+                  <span aria-hidden="true"> · </span>
+                </li>
+                <li><a href="password-1.html">Forgot password?</a></li>
+              </ul>
+            </div>
           </form>
         </div>
       </div>
       <div class="login-footer">
-        Don't have an account? <a href="signup.html">Sign Up</a>
+        <ul class="list-inline">
+          <li><a class="link-muted" href="signup-1.html">Sign up</a></li>
+          <li>|</li>
+          <li><a class="link-muted" href="#">Privacy Policy</a></li>
+          <li>|</li>
+          <li><a class="link-muted" href="#">Terms</a></li>
+          <li>|</li>
+          <li><a class="link-muted" href="#">Cookie Policy</a></li>
+          <li>|</li>
+          <li>© Elephant 2016</li>
+        </ul>
       </div>
     </div>
     <script src="js/vendor.min.js"></script>
@@ -76,5 +97,5 @@
     </script>
   </body>
 
-<!-- Mirrored from 111.68.112.228:443/public/login-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Nov 2023 00:43:04 GMT -->
+<!-- Mirrored from 111.68.112.228:443/public/login-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Nov 2023 00:40:53 GMT -->
 </html>
