@@ -417,62 +417,84 @@
                 </form>
               </li>
               <li class="sidenav-heading">Navigation</li>
-              <li class="sidenav-item has-subnav">
-                <a href="dashboard-1.html" aria-haspopup="true">
-                  <span class="sidenav-icon icon icon-home"></span>
-                  <span class="sidenav-label">Dashboards</span>
-                </a>
-                <ul class="sidenav-subnav collapse">
-                  <li class="sidenav-subheading">Dashboards</li>
-                  <li><a href="dashboard-1.html">Dashboard 1</a></li>
-                  <li><a href="dashboard-2.html">Dashboard 2</a></li>
-                  <li><a href="dashboard-3.html">Dashboard 3</a></li>
-                </ul>
+              
               </li>
 
               <li class="sidenav-item">
                 <a href="category-add.php">
-                <span class="sidenav-label sidepaneltitle ">Categories</span>
+                  <span class="sidenav-label sidepaneltitle ">Categories</span>
                 </a>
               </li>
-             
-             <!--  -->
-
-             <?php
-$query = "SELECT categories.Name FROM `categories`;";
-$stmt1 = mysqli_prepare($conn, $query);
-
-if ($stmt1) {
-    mysqli_stmt_execute($stmt1);
-    $result = mysqli_stmt_get_result($stmt1);
-
-    while ($row = mysqli_fetch_assoc($result)) {
-?>
-        <li class="sidenav-item has-subnav">
-            <a href="#" aria-haspopup="true">
-                <span class="sidenav-icon icon icon-list"></span>
-                <span class="sidenav-label"><?php echo htmlspecialchars($row['Name']); ?></span>
-            </a>
-        </li>
-
-<?php
-    }
-
-    mysqli_stmt_close($stmt1); // Close the prepared statement to free up resources
-} else {
-    // Handle the case where the prepared statement could not be created
-    echo "Error creating prepared statement: " . mysqli_error($conn);
-}
-?>
-
-             <!--  -->
 
              
 
-              <li class="sidenav-item has-subnav">
+              <!-- php start -->
+              <?php
+              $categoryQuery = "SELECT categories.Name FROM `categories`;";
+              $stmt1 = mysqli_prepare($conn, $categoryQuery);
+
+              if ($stmt1) {
+                mysqli_stmt_execute($stmt1);
+                $result = mysqli_stmt_get_result($stmt1);
+
+                while ($categoryRow = mysqli_fetch_assoc($result)) {
+                  $categoryName = $categoryRow['Name'];
+
+                  // Fetch and display equipment names for the current category
+                  $equipmentQuery = "SELECT equipment_name 
+                           FROM `equipments` 
+                           INNER JOIN categories ON equipments.categoryID = categories.id
+                           WHERE categories.Name = ?";
+                  $stmt2 = mysqli_prepare($conn, $equipmentQuery);
+                  mysqli_stmt_bind_param($stmt2, "s", $categoryName);
+                  mysqli_stmt_execute($stmt2);
+                  $equipmentResult = mysqli_stmt_get_result($stmt2);
+              ?>
+
+                  <li class="sidenav-item has-subnav">
+                    <a href="#" aria-haspopup="true">
+                      <span class="sidenav-icon icon icon-list"></span>
+                      <span class="sidenav-label"><?php echo htmlspecialchars($categoryName); ?></span>
+                    </a>
+
+                    <ul class="sidenav-subnav collapse">
+                      <li class="sidenav-subheading">Forms</li>
+                      <?php
+                      while ($equipmentRow = mysqli_fetch_assoc($equipmentResult)) {
+                        $equipmentName = htmlspecialchars($equipmentRow['equipment_name']);
+                        $equipmentPageLink = strtolower(str_replace(' ', '', $equipmentName)) . '.php';
+                      ?>
+                        <li><a href="<?php echo $equipmentPageLink; ?>"><?php echo $equipmentName; ?></a></li>
+                      <?php
+                      }
+
+                      // Close the equipment prepared statement
+                      mysqli_stmt_close($stmt2);
+                      ?>
+
+                    </ul>
+                  </li>
+
+              <?php
+                }
+
+                // Close the category prepared statement
+                mysqli_stmt_close($stmt1);
+              } else {
+                // Handle the case where the prepared statement could not be created
+                echo "Error creating prepared statement: " . mysqli_error($conn);
+              }
+              ?>
+
+
+              <!-- php end -->
+
+              <!-- 1 -->
+
+              <!-- <li class="sidenav-item has-subnav">
                 <a href="#" aria-haspopup="true">
                   <span class="sidenav-icon icon icon-list"></span>
-                  <span class="sidenav-label"><?php echo $row['Name']; ?></span>
+                  <span class="sidenav-label">Example</span>
                 </a>
                 <ul class="sidenav-subnav collapse">
                   <li class="sidenav-subheading">Forms</li>
@@ -480,61 +502,42 @@ if ($stmt1) {
                   <li><a href="hydrolicBreaker.php">Hydraulic Breakers</a></li>
 
                 </ul>
-              </li>
-              <li class="sidenav-item has-subnav">
-                <a href="#" aria-haspopup="true">
-                  <span class="sidenav-icon icon icon-list"></span>
-                  <span class="sidenav-label">Cleaning Equipments</span>
-                </a>
-                <ul class="sidenav-subnav collapse">
-                  <li class="sidenav-subheading">Dryers</li>
-                  <li><a href="clnFloorCleaning.php">Floor Cleaning</a></li>
-                  <li><a href="clnPressureWasher.php">Pressure Washer</a></li>
-                  <li><a href="clnVaccum.php">Vaccum</a></li>
+              </li> -->
 
-                </ul>
-              </li>
-              <li class="sidenav-item has-subnav">
-                <a href="#" aria-haspopup="true">
-                  <span class="sidenav-icon icon icon-list"></span>
-                  <span class="sidenav-label">Plumbing Equipments</span>
-                </a>
-                <ul class="sidenav-subnav collapse">
-                  <li class="sidenav-subheading">Drain Cleaning</li>
-                  <li><a href="drainCleaning-plumbing.php">Drain Cleaning</a></li>
+              <!-- 2 -->
+
+              <!-- <li><a href="clnFloorCleaning.php">Floor Cleaning</a></li>
+                  <li><a href="clnPressureWasher.php">Pressure Washer</a></li>
+                  <li><a href="clnVaccum.php">Vaccum</a></li> -->
+
+
+              <!-- 3 -->
+              <!-- <li><a href="drainCleaning-plumbing.php">Drain Cleaning</a></li>
                   <li><a href="pumping-plumbing.php">Pumping</a></li>
-                  <li><a href="pipeThreading-plumbing.php">Pipe Threading</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-item has-subnav">
-                <a href="#" aria-haspopup="true">
-                  <span class="sidenav-icon icon icon-list"></span>
-                  <span class="sidenav-label">Decorating Tools</span>
-                </a>
-                <ul class="sidenav-subnav collapse">
-                  <li class="sidenav-subheading">Floor Equipments</li>
-                  <li><a href="floorEquipments-decorating.php">Floor Equipments</a></li>
+                  <li><a href="pipeThreading-plumbing.php">Pipe Threading</a></li> -->
+
+              <!-- 4 -->
+              <!-- <li><a href="floorEquipments-decorating.php">Floor Equipments</a></li>
                   <li><a href="paper&paintStrippers-decorating.php">Paper and Paint Strippers</a></li>
-                  <li><a href="tilingTools-decoarting.php">Tiling tools</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-item has-subnav">
-                <a href="#" aria-haspopup="true">
-                  <span class="sidenav-icon icon icon-list"></span>
-                  <span class="sidenav-label">Site Equipments</span>
-                </a>
-                <ul class="sidenav-subnav collapse">
-                  <li class="sidenav-subheading">Extractors</li>
-                  <li><a href="extractor-siteEquipments.php">Extractors</a></li>
+                  <li><a href="tilingTools-decoarting.php">Tiling tools</a></li> -->
+
+
+              <!-- 5 -->
+              <!-- <li><a href="extractor-siteEquipments.php">Extractors</a></li>
                   <li><a href="siteFencing-siteEquipment.php">Site Fencing</a></li>
-                  <li><a href="siteSafety&Security-siteEquipment.php">Site Safety and Security</a></li>
-                </ul>
-              </li>
+                  <li><a href="siteSafety&Security-siteEquipment.php">Site Safety and Security</a></li> -->
 
               <li class="sidenav-item">
                 <a href="category-add.php">
                   <span class="sidenav-icon icon icon-columns"></span>
                   <span class="sidenav-label">Add New Category</span>
+                </a>
+              </li>
+
+              <li class="sidenav-item">
+                <a href="equipmentadd.php">
+                  <span class="sidenav-icon icon icon-columns"></span>
+                  <span class="sidenav-label">Add New Equipment</span>
                 </a>
               </li>
 
@@ -548,179 +551,12 @@ if ($stmt1) {
         </div>
       </div>
     </div>
+
     <div class="layout-content">
       <div class="layout-content-body">
-        <div class="title-bar">
-          <div class="title-bar-actions">
-            <div class="btn-group">
-              <button class="btn btn-default btn-sm hidden-md hidden-lg" data-toggle="modal" data-target="#filters" type="button">
-                <span class="icon icon-filter icon-lg icon-fw"></span>
-                Filter
-              </button>
-            </div>
-          </div>
-          <h1 class="title-bar-title">
-            <span class="d-ib">Elephant store</span>
-            <span class="d-ib">
-              <a class="title-bar-shortcut" href="#" title="Add to shortcut list" data-container="body" data-toggle-text="Remove from shortcut list" data-trigger="hover" data-placement="right" data-toggle="tooltip">
-                <span class="sr-only">Add to shortcut list</span>
-              </a>
-            </span>
-          </h1>
-          <p class="title-bar-description">
-            <small>Your Recently Viewed Items and Featured Recommendations. Inspired by your browsing history.</small>
-          </p>
-        </div>
+
         <div class="store">
-          <div class="store-sidebar">
-            <div id="filters" class="modal" role="dialog" tabindex="-1">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <div class="widget">
-                      <div class="widget-product-brands">
-                        <div class="product-brands">
-                          <div class="product-brands-search">
-                            <div class="form-group form-group-sm">
-                              <div class="input-with-icon">
-                                <input class="form-control thick" type="text" placeholder="Search available brands&hellip;">
-                                <span class="icon icon-search input-icon"></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="product-brands-results">
-                            <div class="custom-scrollbar">
-                              <div class="custom-controls-stacked">
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox" checked="">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Burberry</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Columbia</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Patagonia</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Kakadu Traders Australia</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Kenneth Roberts</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">The North Face</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Tommy Hilfiger</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Polo Ralph Lauren</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Black Mountain</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Boston Harbour</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Oscar de la Renta</span>
-                                </label>
-                                <label class="custom-control custom-control-primary custom-checkbox">
-                                  <input class="custom-control-input" type="checkbox">
-                                  <span class="custom-control-indicator"></span>
-                                  <span class="custom-control-label">Paper Denim &amp; Cloth</span>
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="widget">
-                      <h5 class="widget-heading">Price range</h5>
-                      <div class="widget-product-price-range">
-                        <div class="product-price-range">
-                          <div class="slider slider-circle slider-primary" data-slider="primary" data-min="0" data-max="150" data-start="[9, 129]" data-step="0.5" data-connect="true" data-target='["#from", "#to"]'></div>
-                          Price: $
-                          <span id="from">9</span> — $
-                          <span id="to">129</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="widget">
-                      <h5 class="widget-heading">Size</h5>
-                      <div class="widget-product-size">
-                        <div class="product-size" data-toggle="buttons">
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="xs">XS
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="s">S
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="m">M
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="l">L
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="xl">XL
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="2xl">2XL
-                          </label>
-                          <label class="btn btn-outline-primary btn-sm">
-                            <input type="checkbox" name="size" value="3xl">3XL
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="widget">
-                      <h5 class="widget-heading">Color</h5>
-                      <div class="widget-product-color">
-                        <div class="product-color" data-toggle="buttons">
-                          <label class="btn btn-primary btn-sm">
-                            <input type="checkbox" name="color" value="black">
-                          </label>
-                          <label class="btn btn-info btn-sm">
-                            <input type="checkbox" name="color" value="blue">
-                          </label>
-                          <label class="btn btn-danger btn-sm">
-                            <input type="checkbox" name="color" value="silver">
-                          </label>
-                          <label class="btn btn-default btn-sm">
-                            <input type="checkbox" name="color" value="white">
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="btn btn-primary btn-block">Apply filters</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div class="store-content">
             <div class="row">
               <div class="col-xs-12">
@@ -1126,7 +962,7 @@ if ($stmt1) {
   <script src="js/vendor.min.js"></script>
   <script src="js/elephant.min.js"></script>
   <script src="js/application.min.js"></script>
- 
+
 </body>
 
 <!-- Mirrored from 111.68.112.228:443/public/store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 02 Nov 2023 00:43:56 GMT -->

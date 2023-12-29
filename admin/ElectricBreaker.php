@@ -442,215 +442,78 @@
             </div>
             <h1 class="title-bar-title">
               <span class="d-ib">Electric Breakers</span>
-              <span class="d-ib">
-                <a class="title-bar-shortcut" href="#" title="Add to shortcut list" data-container="body" data-toggle-text="Remove from shortcut list" data-trigger="hover" data-placement="right" data-toggle="tooltip">
-                  <span class="sr-only">Add to shortcut list</span>
-                </a>
-              </span>
+             
             </h1>
           </div>
           <div class="store">
             <div class="store-sidebar">
-              <div id="filters" class="modal" role="dialog" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-body">
-                      <div class="widget">
-                        <div class="widget-product-brands">
-                          <div class="product-brands">
-                            <div class="product-brands-search">
-                              <div class="form-group form-group-sm">
-                                <div class="input-with-icon">
-                                  <input class="form-control thick" type="text" placeholder="Search available brands&hellip;">
-                                  <span class="icon icon-search input-icon"></span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="product-brands-results">
-                              <div class="custom-scrollbar">
-                                <div class="custom-controls-stacked">
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" checked="">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Burberry</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Columbia</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Patagonia</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Kakadu Traders Australia</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Kenneth Roberts</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">The North Face</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Tommy Hilfiger</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Polo Ralph Lauren</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Black Mountain</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Boston Harbour</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Oscar de la Renta</span>
-                                  </label>
-                                  <label class="custom-control custom-control-primary custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-label">Paper Denim &amp; Cloth</span>
-                                  </label>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="widget">
-                        <h5 class="widget-heading">Price range</h5>
-                        <div class="widget-product-price-range">
-                          <div class="product-price-range">
-                            <div class="slider slider-circle slider-primary" data-slider="primary" data-min="0" data-max="150" data-start="[9, 129]" data-step="0.5" data-connect="true" data-target='["#from", "#to"]'></div>
-                            Price: $
-                            <span id="from">9</span> — $
-                            <span id="to">129</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="widget">
-                        <h5 class="widget-heading">Size</h5>
-                        <div class="widget-product-size">
-                          <div class="product-size" data-toggle="buttons">
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="xs">XS
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="s">S
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="m">M
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="l">L
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="xl">XL
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="2xl">2XL
-                            </label>
-                            <label class="btn btn-outline-primary btn-sm">
-                              <input type="checkbox" name="size" value="3xl">3XL
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="widget">
-                        <h5 class="widget-heading">Color</h5>
-                        <div class="widget-product-color">
-                          <div class="product-color" data-toggle="buttons">
-                            <label class="btn btn-primary btn-sm">
-                              <input type="checkbox" name="color" value="black">
-                            </label>
-                            <label class="btn btn-info btn-sm">
-                              <input type="checkbox" name="color" value="blue">
-                            </label>
-                            <label class="btn btn-danger btn-sm">
-                              <input type="checkbox" name="color" value="silver">
-                            </label>
-                            <label class="btn btn-default btn-sm">
-                              <input type="checkbox" name="color" value="white">
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <button class="btn btn-primary btn-block">Apply filters</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+             
             </div>
-            <div class="store-content">
-              <?php  
-              $query = mysqli_query($conn, "SELECT * FROM `equipments`WHERE categoryID = '1' ");
-              while($row = mysqli_fetch_array($query)){
-                ?>
-              <div class="row">
+
+
+<?php
+// Assuming you have a MySQL connection established earlier in your code
+// $conn = mysqli_connect("your_host", "your_username", "your_password", "your_database");
+
+$query = "SELECT equipment_name, price, old_price, equipmentImg FROM `equipments` WHERE equipment_name = 'Automatic Optical Level Package'";
+// echo $query;
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $equipmentName = htmlspecialchars($row['equipment_name']);
+        $currentPrice = htmlspecialchars($row['price']);
+        $oldPrice = htmlspecialchars($row['old_price']);
+        $imageSrc= 'data:image/' . 'jpg' . ';base64,' . base64_encode($row['equipmentImg'])
+?>
+        <div class="store-content">
+            <div class="row">
                 <div class="col-xs-12">
-                  <ul class="products">
-                    <li class="product">
-                      <div class="product-image">
-                        <a class="overlay" href="product.html">
-                          <div class="overlay-image">
-                            <img class="img-responsive" src="img/<?php echo $row['img'];?>" alt="Raja Elephant T-shirt">
-                          </div>
-                          <div class="overlay-content overlay-top">
-                            <span class="label label-success pull-right"><?php echo $row['availability'];?></span>
-                          </div>
-                        </a>
-                      </div>
-                      <div class="product-details">
-                        <h5 class="product-name">
-                          <a class="link-muted" href="product.html"><?php echo $row['equipment_name'];?></a>
-                        </h5>
-                        <span class="product-rating">
-                          <span class="divider">
-                            <span class="divider-content">
-                              <span class="icon icon-star active"></span>
-                              <span class="icon icon-star active"></span>
-                              <span class="icon icon-star active"></span>
-                              <span class="icon icon-star active"></span>
-                              <span class="icon icon-star active"></span>
-                            </span>
-                          </span>
-                        </span>
-                        <span class="product-price">
-                          <span class="product-price-current ">£<?php echo $row['price'];?></span>
-                          <span class="product-price-old"> £<?php echo  $row['old_price'];?></span>
-                        </span>
-                        <span class="divider">
-                      <span><button class="btn-outline-success">View</button></span> 
-                       <span><button class="btn-outline-info">Update</button></span>
-                       <span><button class="btn-outline-primary">Delete</button></span>
-                       <span><button class="btn-outline-warning">Edit</button></span>
-                      </span>
-                      </div>
-                  </li>
-                  </ul>
+                    <ul class="products">
+                        <li class="product">
+                            <div class="product-image">
+                                <a class="overlay" href="product.html">
+                                    <div class="overlay-image">
+                                        <img class="img-responsive" src="<?php echo $imageSrc; ?>" alt="<?php echo $equipmentName; ?>">
+                                    </div>
+                                    <div class="overlay-content overlay-top">
+                                        <span class="label label-success pull-right">Available!</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="product-details">
+                                <h5 class="product-name">
+                                    <a class="link-muted" href="product.html"><?php echo $equipmentName; ?></a>
+                                </h5>
+                                <span class="product-rating">
+                                    <!-- Your rating HTML goes here -->
+                                </span>
+                                <span class="product-price">
+                                    <span class="product-price-current">$<?php echo $currentPrice; ?></span>
+                                    <span class="product-price-old">$<?php echo $oldPrice; ?></span>
+                                </span>
+                                <span class="divider">
+                                    <span><button class="btn-outline-success">View</button></span>
+                                    <!-- Add your other buttons here -->
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-              </div> 
-           <?php } ?>
-            
             </div>
+        </div>
+<?php
+    }
+} else {
+    echo "Error executing the query: " . mysqli_error($conn);
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+
+
           </div>
         </div>
       </div>
