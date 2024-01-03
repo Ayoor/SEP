@@ -1,0 +1,7 @@
+work on the sidebar links and pages
+add the necessary equipments to db
+work on the nav bar image
+include view, update and delete on the equipments
+include add user to top nav
+work on signin and sign out and signup
+edit store.php homepage

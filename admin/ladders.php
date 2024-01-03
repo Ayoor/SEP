@@ -92,7 +92,7 @@ if(!$_SESSION["username"]){
                     <ul class="products">
                       <li class="product">
                         <div class="product-image">
-                          <a class="overlay" href="#">
+                          <a class="overlay" href="product.html">
                             <div class="overlay-image">
                               <img class="img-responsive" src="<?php echo $imageSrc; ?>" alt="<?php echo $equipmentName; ?>">
                             </div>
@@ -103,7 +103,7 @@ if(!$_SESSION["username"]){
                         </div>
                         <div class="product-details">
                           <h5 class="product-name">
-                            <a class="link-muted" href="#"><?php echo $equipmentName; ?></a>
+                            <a class="link-muted" href="product.html"><?php echo $equipmentName; ?></a>
                           </h5>
                           <span class="product-rating">
                             <!-- Your rating HTML goes here -->

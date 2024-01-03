@@ -4,6 +4,30 @@ session_start();
 if(!$_SESSION["username"]){
   header('Location: signin.php');
 }
+
+
+        // retrieve equipment data   
+$equipment = $_GET['equipmentname'];
+if(!$equipment){
+    header('Location:index.php');
+}
+else{
+$query = "SELECT equipment_name, price, description, Stock_Balance balance, `availability`, equipmentImg FROM `equipments` WHERE equipment_name = '$equipment'";
+// echo $query;
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+if ($result) {
+  
+    $oldequipmentName = htmlspecialchars($row['equipment_name']);
+    $oldcurrentPrice = htmlspecialchars($row['price']);
+    $olddescription = htmlspecialchars($row['description']);
+    $oldbalance = htmlspecialchars($row['balance']);
+    $imageSrc = 'data:image/' . 'jpg' . ';base64,' . base64_encode($row['equipmentImg']);
+  
+}
+}
+
+// update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Extract form data
     $equipmentName = mysqli_real_escape_string($conn, $_POST['equipmentName']);
@@ -23,8 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // connect to the database
     // insert the image data into the database
     $pdo = new PDO('mysql:host=localhost;dbname=main-db', 'root', '');
-    $stmt = $pdo->prepare("INSERT INTO `equipments` (equipment_name, description, categoryID, equipmentImg, price, Stock_Balance, availability) VALUES (?, ?, ?, ?, ?, ?, ?)");
-//    echo $balance;
+    $stmt = $pdo->prepare("UPDATE `equipments` SET equipment_name =?, description = ?, categoryID = ?, equipmentImg = ?, price = ?, Stock_Balance = ?, availability = ? WHERE equipment_name = ?");
     $stmt->bindParam(1, $equipmentName);
     $stmt->bindParam(2, $description);
     $stmt->bindParam(3, $categoryID);
@@ -32,7 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(5, $price);
     $stmt->bindParam(6, $balance);
     $stmt->bindParam(7, $availability);
+    $stmt->bindParam(8, $oldequipmentName);
     $stmt->execute();
+    
+    if ($stmt) {
+        // Display success message and redirect after 3 seconds
+        echo '<div class="alert alert-success" role="alert">
+            Equipment Successfully updated.
+        </div>';
+    
+        echo '<script>
+            setTimeout(function(){
+                window.location.href = "index.php";
+            }, 2000);
+        </script>';
+    }
  }
 
 }
@@ -75,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Add New Equipment</title>
+    <title>Edit Equipment</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <meta name="description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
     <meta property="og:url" content="http://demo.madebytilde.com/elephant">
@@ -112,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="layout-content-body">
                 <div class="title-bar">
                     <h1 class="title-bar-title">
-                        <span class="d-ib">Add New Equipment</span>
+                        <span class="d-ib">Edit Equipment</span>
 
                     </h1>
                 </div>
@@ -124,13 +161,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="form-control-1">Equipment Name</label>
                                     <div class="col-sm-9">
-                                        <input id="form-control-1" required class="form-control" type="text" name="equipmentName">
+                                        <input id="form-control-1" value="<?php echo $equipment?>" disabled required class="form-control" type="text" name="equipmentName">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" for="form-control-8">Equipment Description</label>
                                     <div class="col-sm-9">
-                                        <textarea id="form-control-8" required class="form-control" rows="3" name="description"></textarea>
+                                        <textarea id="form-control-8" value="<?php echo $olddescription?>" required class="form-control" rows="3" name="description"></textarea>
                                     </div>
                                 </div>
 
@@ -163,14 +200,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="price">Price</label>
+                                    <label class="col-sm-3 control-label"  for="price">Price</label>
                                     <div class="col-sm-3">
-                                        <input id="price" class="form-control" type="number" maxlength="8" required name="price">
+                                        <input id="price" class="form-control"value="<?php echo $oldcurrentPrice?>" type="number" maxlength="8" required name="price">
                                     </div>
 
-                                    <label class="col-sm-2 control-label" for="price">Stock Balance</label>
+                                    <label class="col-sm-2 control-label"  for="price">Stock Balance</label>
                                     <div class="col-sm-3">
-                                        <input id="balance" class="form-control" type="number" maxlength="8" required name="balance">
+                                        <input id="balance" class="form-control" value="<?php echo $oldbalance?>" type="number" maxlength="8" required name="balance">
                                     </div>
                                 </div>
                                 
