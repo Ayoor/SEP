@@ -13,7 +13,7 @@ if(!$_SESSION["username"]){
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Store &middot; Elephant Template &middot; The fastest way to build Modern Admin APPS for any platform, browser, or device.</title>
+  <title>Admin Dashboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
   <meta name="description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
   <meta property="og:url" content="http://demo.madebytilde.com/elephant">
@@ -56,10 +56,10 @@ if(!$_SESSION["username"]){
 
 <section id="pagebody" style="border: 1px solid red; height: 85vh; display: flex; align-items: center; justify-content: center;">
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" style="background-color: transparent;">
     <h1 class="display-2" style="font-weight: 500;">Shelton Tool-Hire</h1><br>
     <p id="welcometext">Empowering Your Projects, One Tool at a Time.</p>
-    
+    <h3 class="" style="color: red;">Admin Console</h3>
 </div>
 
 </section>

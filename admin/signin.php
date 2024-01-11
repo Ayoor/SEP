@@ -30,7 +30,7 @@ if ($_POST) {
 
     if ($result["email"] && password_verify($password, $result["password"])) {
         $_SESSION['username'] = $result["firstname"] . " " . $result["lastname"];
-       
+        $_SESSION['email'] = $email;
         echo '<script>
         setTimeout(function(){
             window.location.href = "index.php";

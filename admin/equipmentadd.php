@@ -12,30 +12,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = mysqli_real_escape_string($conn, $_POST['price']);
     $balance = mysqli_real_escape_string($conn, $_POST['balance']);
     $availability = "unavailable";
+
     // Get the categoryID based on the category name
     $categoryID = getCategoryID($categoryName);
 
-  // check if an image file was uploaded
-  if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-    $name = $_FILES['image']['name'];
-    $type = $_FILES['image']['type'];
-    $data = file_get_contents($_FILES['image']['tmp_name']);
-    // connect to the database
-    // insert the image data into the database
-    $pdo = new PDO('mysql:host=localhost;dbname=main-db', 'root', '');
-    $stmt = $pdo->prepare("INSERT INTO `equipments` (equipment_name, description, categoryID, equipmentImg, price, Stock_Balance, availability) VALUES (?, ?, ?, ?, ?, ?, ?)");
-//    echo $balance;
-    $stmt->bindParam(1, $equipmentName);
-    $stmt->bindParam(2, $description);
-    $stmt->bindParam(3, $categoryID);
-    $stmt->bindParam(4, $data);
-    $stmt->bindParam(5, $price);
-    $stmt->bindParam(6, $balance);
-    $stmt->bindParam(7, $availability);
-    $stmt->execute();
- }
+    // check if an image file was uploaded
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $name = $_FILES['image']['name'];
+        $type = $_FILES['image']['type'];
+        $data = file_get_contents($_FILES['image']['tmp_name']);
 
+        // connect to the database
+        // insert the image data into the database
+        $pdo = new PDO('mysql:host=localhost;dbname=main-db', 'root', '');
+        $stmt = $pdo->prepare("INSERT INTO `equipments` (equipment_name, description, categoryID, equipmentImg, price, Stock_Balance, availability) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt->bindParam(1, $equipmentName);
+        $stmt->bindParam(2, $description);
+        $stmt->bindParam(3, $categoryID);
+        $stmt->bindParam(4, $data);
+        $stmt->bindParam(5, $price);
+        $stmt->bindParam(6, $balance);
+        $stmt->bindParam(7, $availability);
+
+        if ($stmt->execute()) {
+            // File name for the new PHP file
+            $fileName = strtolower(str_replace(' ', '', $equipmentName)) . '.php';
+                        
+            // Code to be written in the new PHP file
+            $newCode = '<?php include("equipmentformat.php"); ?>';
+        
+            // Write the code to the new PHP file
+            if (file_put_contents($fileName, $newCode)) {
+echo '<div class="alert alert-success" role="alert">
+                New Equipment Successfully Added
+            </div>';
+        
+                echo '<script>
+                    setTimeout(function(){
+                        window.location.href = "viewequipments.php?category=' . urlencode($categoryName) . '";
+                    }, 3000);
+                </script>';
+                exit();
+            } else {
+                echo "Error creating the PHP file.";
+            }
+        } else {
+            echo "Error executing the statement.";
+        }
+        
+    }
 }
+
     // Function to get categoryID based on category name
     function getCategoryID($categoryName)
     {

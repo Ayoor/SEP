@@ -30,6 +30,12 @@
   padding: 0;
   width: 32px;
 }
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 .store-content {
   max-width: 1920px;
 }
