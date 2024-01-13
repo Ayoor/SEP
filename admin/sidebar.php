@@ -119,6 +119,13 @@
             </a>
           </li>
 
+          <li class="sidenav-item">
+            <a href="orders.php">
+              <span class="sidenav-icon icon icon-list"></span>
+              <span class="sidenav-label">Orders</span>
+            </a>
+          </li>
+
 
 
 

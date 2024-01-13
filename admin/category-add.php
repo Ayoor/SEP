@@ -7,32 +7,44 @@ if (!$_SESSION["username"]) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Extract form data
-    $category = $_POST['categoryName'];
-    $description = $_POST['description'];
+    $category = mysqli_real_escape_string($conn, $_POST['categoryName']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
 
-    $query = "INSERT INTO `categories`(`Name`, `Description`) VALUES ('$category', '$description')";
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $name = $_FILES['image']['name'];
+        $type = $_FILES['image']['type'];
+        $data = mysqli_real_escape_string($conn, file_get_contents($_FILES['image']['tmp_name']));
 
-    $queryRun = mysqli_query($conn, $query);
+        // Use prepared statement to prevent SQL injection
+        $stmt = $conn->prepare("INSERT INTO `categories`(`Name`, `Description`, `cat_img`) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $category, $description, $data);
+        $queryRun = $stmt->execute();
 
-    if ($queryRun) {
-        echo '<div class="alert alert-success" role="alert">
-           New Category Successfully Added
-        </div>';
+        if ($queryRun) {
+            echo '<div class="alert alert-success" role="alert">
+                New Category Successfully Added
+            </div>';
 
-        echo '<script>
-            setTimeout(function(){
-                window.location.href = "index.php";
-            }, 3000);
-        </script>';
-        
-        // Exit the script to prevent further execution
-        exit();
-    } else {
-        // $_SESSION["status"] = "Data Not Inserted";
-        header("location: category-add.php");
-    }
+            echo '<script>
+                setTimeout(function(){
+                    window.location.href = "index.php";
+                }, 3000);
+            </script>';
+
+            // Exit the script to prevent further execution
+            exit();
+        } else {
+            echo "Something went wrong, try again or contact admin";
+        }
+
+        $stmt->close();
+    } else echo "image not processed";
 }
+
+
+
 ?>
+
 
 
 
@@ -45,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Add New Equipment Category</title>
+    <title>Add New Category</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <meta name="description" content="Elephant is an admin template that helps you build modern Admin Applications, professionally fast! Built on top of Bootstrap, it includes a large collection of HTML, CSS and JS components that are simple to use and easy to customize.">
     <meta property="og:url" content="http://demo.madebytilde.com/elephant">
@@ -73,12 +85,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="layout layout-header-fixed">
-   <?php include "topnav.php"; ?>
+    <?php include "topnav.php"; ?>
     <div class="layout-main">
 
-   
+ <div class="backarrow">
+    <a href="index.php">
+                <img src="assets/img/banner/left-arrow-icon.png" 
+                class="Home Button" 
+                alt="home button"
+                width="30px"
+                style="margin-left: 100px; margin-top: 30px;">
+            </a>
+            </div>
 
         <div class="layout-content">
+           
             <div class="layout-content-body">
                 <div class="title-bar">
                     <h1 class="title-bar-title">
@@ -89,26 +110,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="row">
                     <div class="col-md-8">
                         <div class="demo-form-wrapper">
-                        <form class="form form-horizontal"  method="POST">
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label" for="form-control-1">Category Name</label>
-                    <div class="col-sm-9">
-                      <input id="form-control-1" class="form-control" type="text" name="categoryName">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label" for="form-control-8">Category Description</label>
-                    <div class="col-sm-9">
-                      <textarea id="form-control-8" class="form-control" rows="3" name="description"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label" for="form-control-8"></label>
-                    <div class="col-sm-9">
-                    <button type="submit" name="save_data" class="btn btn-primary btn-block">Submit</button>
-                    </div>
-                  </div>
-                  </form>
+                            <form class="form form-horizontal" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="form-control-1">Category Name</label>
+                                    <div class="col-sm-9">
+                                        <input id="form-control-1" class="form-control" type="text" name="categoryName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="form-control-8">Category Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea id="form-control-8" class="form-control" rows="3" name="description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="form-control-8">Category Image</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="image" id="image" accept="image/*" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="form-control-8"></label>
+                                    <div class="col-sm-9">
+                                        <button type="submit" name="save_data" class="btn btn-primary btn-block">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

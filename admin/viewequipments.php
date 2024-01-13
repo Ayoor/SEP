@@ -113,7 +113,7 @@ if ($result) {
 
    
 } else {
-    echo "No Equipment found in this Category";
+    echo "<h3>No Equipment found in this Category </h3>";
 }
 
 // Close the database connection

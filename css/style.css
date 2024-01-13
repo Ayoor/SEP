@@ -517,14 +517,14 @@ ol {
 
 .banner__text h1 {
 	font-size: 80px;
-	color: #111111;
+	color: #ffff;
 	font-family: "Cookie", cursive;
 	margin-bottom: 15px;
 }
 
 .banner__text a {
 	font-size: 14px;
-	color: #111111;
+	color: #ffff;
 	text-transform: uppercase;
 	font-weight: 700;
 	position: relative;

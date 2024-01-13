@@ -123,6 +123,8 @@
   margin-bottom: 0;
   margin-top: 0;
 }
+
+
 @media (max-width: 991px) {
   .layout-content-body {
     -webkit-animation-duration: 0;

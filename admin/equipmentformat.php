@@ -87,7 +87,7 @@ $equipment = $_GET['equipmentname'];
               $balance = htmlspecialchars($row['balance']);
               $imageSrc = 'data:image/' . 'jpg' . ';base64,' . base64_encode($row['equipmentImg'])
           ?>
-              <div class="store-content">
+             
                 <div class="row">
                   <div class="col-xs-12">
                     <ul class="products">
@@ -96,7 +96,7 @@ $equipment = $_GET['equipmentname'];
                           <a class="overlay" href="#">
                             <div class="overlay-image">
                               <img class="img-responsive" src="<?php echo $imageSrc; ?>" alt="<?php echo $equipmentName; ?>">
-                            </div>
+                               </div>
                             <div class="overlay-content overlay-top">
                               <span class="label label-success pull-right"><?php echo $balance ."pcs left" ?></span>
                             </div>
@@ -122,7 +122,7 @@ $equipment = $_GET['equipmentname'];
                       </li>
                     </ul>
                   </div>
-                </div>
+              
               </div>
           <?php
             }

@@ -133,7 +133,15 @@ echo '<div class="alert alert-success" role="alert">
 <body class="layout layout-header-fixed">
    <?php include "topnav.php"; ?>
     <div class="layout-main">
-
+    <div class="backarrow">
+    <a href="index.php">
+                <img src="assets/img/banner/left-arrow-icon.png" 
+                class="Home Button" 
+                alt="home button"
+                width="30px"
+                style="margin-left: 100px; margin-top: 30px;">
+            </a>
+            </div>
    
 
         <div class="layout-content">

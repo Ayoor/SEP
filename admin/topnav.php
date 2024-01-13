@@ -21,7 +21,7 @@
           // $conn = mysqli_connect("your_host", "your_username", "your_password", "your_database");
 
           // Query to get the count of pending transactions
-          $countQuery = "SELECT COUNT(*) AS pendingCount FROM `transanctions` WHERE `transanctions`.`status` = 'pending'";
+          $countQuery = "SELECT COUNT(*) AS pendingCount FROM `orders` WHERE `orders`.`status` = 'pending'";
           $countResult = mysqli_query($conn, $countQuery);
           $pendingCount = 0;
 
